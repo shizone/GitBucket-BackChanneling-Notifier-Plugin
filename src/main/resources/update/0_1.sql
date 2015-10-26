@@ -1,0 +1,2 @@
+-- Add activity trigger
+--create trigger trigger_activity after insert on activity for each row call "gitbucket.backchanelling.trigger.ActivityTrigger";
