@@ -6,12 +6,12 @@ import play.twirl.sbt.Import.TwirlKeys._
 object MyBuild extends Build {
 
   val Organization = "shizone"
-  val Name = "gitbucket-back-channeling-plugin"
+  val Name = "gitbucket-backchanneling-notifier-plugin"
   val Version = "0.1"
   val ScalaVersion = "2.11.6"
 
   lazy val project = Project (
-    "gitbucket-back-channeling-plugin",
+    "gitbucket-backchanneling-notifier-plugin",
     file(".")
   )
   .settings(

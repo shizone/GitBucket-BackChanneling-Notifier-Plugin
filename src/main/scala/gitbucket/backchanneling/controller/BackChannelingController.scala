@@ -1,4 +1,4 @@
-package gitbucket.backchanelling.controller
+package gitbucket.backchanneling.controller
 
 import java.io.File
 import gitbucket.core.view.helpers
@@ -12,20 +12,20 @@ import gitbucket.core.util.ControlUtil._
 import gitbucket.core.util.Implicits._
 import gitbucket.core.view.helpers._
 
-import gitbucket.backchanelling.html
+import gitbucket.backchanneling.html
 
 import org.apache.commons.io.FileUtils
 import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.lib._
 import org.scalatra.Ok
 
-class BackChanellingController extends BackChanellingControllerBase
+class BackChannelingController extends BackChannelingControllerBase
   with RepositoryService with AccountService with OwnerAuthenticator
 
-trait BackChanellingControllerBase extends ControllerBase {
+trait BackChannelingControllerBase extends ControllerBase {
   self: RepositoryService with AccountService with OwnerAuthenticator =>
 
-  get("/:owner/:repository/settings/backchanelling")(ownerOnly {
+  get("/:owner/:repository/settings/backchanneling")(ownerOnly {
     html.edit(_, flash.get("info"))
   })
 

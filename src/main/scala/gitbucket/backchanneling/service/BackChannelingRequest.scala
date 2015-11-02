@@ -1,6 +1,6 @@
-package gitbucket.backchanelling.service
+package gitbucket.backchanneling.service
 
-object BackChanellingRequest {
+object BackChannelingRequest {
   def post(message: String): Unit = {
     // TODO post back-chanelling api
     System.out.println(message)

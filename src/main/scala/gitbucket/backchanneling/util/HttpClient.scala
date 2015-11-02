@@ -1,4 +1,4 @@
-package gitbucket.backchanelling.util
+package gitbucket.backchanneling.util
 
 import java.io._
 import java.net.HttpURLConnection

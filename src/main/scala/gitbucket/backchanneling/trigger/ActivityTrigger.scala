@@ -1,8 +1,8 @@
-package gitbucket.backchanelling.trigger
+package gitbucket.backchanneling.trigger
 
 import java.sql.Connection
 
-import gitbucket.backchanelling.service.BackChanellingRequest
+import gitbucket.backchanneling.service.BackChannelingRequest
 import org.h2.api.Trigger
 
 /**
@@ -18,7 +18,7 @@ class ActivityTrigger extends Trigger {
 
   @Override
   def fire(conn: Connection, oldRow: Array[Object], newRow: Array[Object]): Unit = {
-    BackChanellingRequest.post(
+    BackChannelingRequest.post(
       s"user:$newRow[1], message:$newRow[5], additional_info:$newRow[6]")
   }
 

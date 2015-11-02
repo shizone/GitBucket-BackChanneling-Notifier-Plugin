@@ -1,11 +1,11 @@
 @(repository: gitbucket.core.service.RepositoryService.RepositoryInfo, info: Option[Any])(implicit context: gitbucket.core.controller.Context)
 @import context._
 @import gitbucket.core.view.helpers._
-@gitbucket.core.html.main("Back Chanelling", Some(repository)){
+@gitbucket.core.html.main("Back Channeling", Some(repository)){
 @gitbucket.core.html.menu("settings", repository){
-@gitbucket.core.settings.html.menu("backchanelling", repository){
+@gitbucket.core.settings.html.menu("backchanneling", repository){
 @gitbucket.core.helper.html.information(info)
-<form id="form" method="post" action="@url(repository)/settings/options" validate="true">
+<form id="form" method="post" action="@url(repository)/settings/backchanneling/update" validate="true">
   <div class="box">
     <div class="box-header">Back Chanelling</div>
     <div class="box-content">

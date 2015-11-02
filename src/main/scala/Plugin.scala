@@ -1,8 +1,8 @@
-import gitbucket.backchanelling.trigger.ActivityTrigger
+import gitbucket.backchanneling.trigger.ActivityTrigger
 import gitbucket.core.service.SystemSettingsService.SystemSettings
 import gitbucket.core.plugin._
 import gitbucket.core.util.Version
-import gitbucket.backchanelling.controller._
+import gitbucket.backchanneling.controller._
 import javax.servlet.ServletContext
 
 class Plugin extends gitbucket.core.plugin.Plugin {
@@ -11,9 +11,9 @@ class Plugin extends gitbucket.core.plugin.Plugin {
 
   override val pluginId: String = "back-channeling"
 
-  override val pluginName: String = "Back-Chanelling Plugin"
+  override val pluginName: String = "Back-Channeling Plugin"
 
-  override val description: String = "Notify GitBucket activity to Back-Chanelling."
+  override val description: String = "Notify GitBucket activity to Back-Channeling."
 
   override val versions: List[Version] = List(
     Version(0, 1)
@@ -21,7 +21,7 @@ class Plugin extends gitbucket.core.plugin.Plugin {
 
   override def initialize(registry: PluginRegistry, context: ServletContext, settings: SystemSettings): Unit = {
     super.initialize(registry, context, settings)
-    println("-- Back-Chanelling plug-in initialized --")
+    println("-- Back-Channeling plug-in initialized --")
   }
 
   //  override val repositoryRoutings = Seq(
@@ -29,27 +29,27 @@ class Plugin extends gitbucket.core.plugin.Plugin {
   //  )
 
   override val controllers = Seq(
-    "/*" -> new BackChanellingController()
+    "/*" -> new BackChannelingController()
   )
   override def javaScripts(registry: PluginRegistry, context: ServletContext, settings: SystemSettings): Seq[(String, String)] = {
     // Add Snippet link to the header
     val path = settings.baseUrl.getOrElse(context.getContextPath)
     Seq(
-      ".*/settings/(?!backchanelling)[^/]*" -> s"""
+      ".*/settings/(?!backchanneling)[^/]*" -> s"""
         |var owner = $$("input[type=hidden][name=owner]").val();
         |var repository = $$("input[type=hidden][name=repository]").val();
         |$$('ul.side-menu li:last').after(
         |  $$('<li></li>').append(
-        |   $$('<a href="">Back Chanelling</a>').attr('href', '${path}/' + owner + '/' + repository + '/settings/backchanelling')
+        |   $$('<a href="">Back Channeling</a>').attr('href', '${path}/' + owner + '/' + repository + '/settings/backchanneling')
         |  )
         |);
       """.stripMargin,
-      ".*/settings/backchanelling" -> s"""
+      ".*/settings/backchanneling" -> s"""
         |var owner = $$("input[type=hidden][name=owner]").val();
         |var repository = $$("input[type=hidden][name=repository]").val();
         |$$('ul.side-menu li:last').after(
         |  $$('<li class="active"></li>').append(
-        |   $$('<a href="">Back Chanelling</a>').attr('href', '${path}/' + owner + '/' + repository + '/settings/backchanelling')
+        |   $$('<a href="">Back Channeling</a>').attr('href', '${path}/' + owner + '/' + repository + '/settings/backchanneling')
         |  )
         |);
         |
