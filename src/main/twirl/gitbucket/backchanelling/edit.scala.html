@@ -10,6 +10,11 @@
     <div class="box-header">Back Chanelling</div>
     <div class="box-content">
       <fieldset>
+        <label for="applicationUrl" class="strong">Application URL:</label>
+        <input type="text" name="applicationUrl" id="applicationUrl" value="" placeholder="e.g. http://localhost:3009/" style="width: 600px;"/>
+        <span id="error-applicationUrl" class="error"></span>
+      </fieldset>
+      <fieldset class="margin">
         <label for="authorizationCode" class="strong">Authorization Code:</label>
         <input type="text" name="authorizationCode" id="authorizationCode" value=""/>
         <span id="error-authorizationCode" class="error"></span>
@@ -17,6 +22,7 @@
       <fieldset class="margin">
         <label for="threadId" class="strong">Thread Id:</label>
         <input type="text" name="threadId" id="threadId" value=""/>
+        <span id="error-threadId" class="error"></span>
       </fieldset>
     </div>
   </div>
