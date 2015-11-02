@@ -23,27 +23,39 @@ class Plugin extends gitbucket.core.plugin.Plugin {
     println("-- Back-Chanelling plug-in initialized --")
   }
 
-//  override val repositoryRoutings = Seq(
-//    GitRepositoryRouting("gist/(.+?)/(.+?)\\.git", "gist/$1/$2", new GistRepositoryFilter())
-//  )
-//
-//  override val controllers = Seq(
-//    "/*" -> new GistController()
-//  )
-//
-//  override def javaScripts(registry: PluginRegistry, context: ServletContext, settings: SystemSettings): Seq[(String, String)] = {
-//    // Add Snippet link to the header
-//    val path = settings.baseUrl.getOrElse(context.getContextPath)
-//    Seq(
-//      ".*" -> s"""
-//        |$$('a.global-header-menu:last').after(
-//        |  $$('<a href="${path}/gist" class="global-header-menu">Gist</a>')
-//        |);
-//      """.stripMargin
-//    )
-//  }
+  //  override val repositoryRoutings = Seq(
+  //    GitRepositoryRouting("gist/(.+?)/(.+?)\\.git", "gist/$1/$2", new GistRepositoryFilter())
+  //  )
+  //
+  //  override val controllers = Seq(
+  //    "/*" -> new GistController()
+  //  )
+  //
+  override def javaScripts(registry: PluginRegistry, context: ServletContext, settings: SystemSettings): Seq[(String, String)] = {
+    // Add Snippet link to the header
+    val path = settings.baseUrl.getOrElse(context.getContextPath)
+    Seq(
+      ".*/settings/(?!backchanelling)[^/]*" -> s"""
+        |var owner = $$("input[type=hidden][name=owner]").val();
+        |var repository = $$("input[type=hidden][name=repository]").val();
+        |$$('ul.side-menu li:last').after(
+        |  $$('<li></li>').append(
+        |   $$('<a href="">Back Chanelling</a>').attr('href', '${path}/' + owner + '/' + repository + '/settings/backchanelling')
+        |  )
+        |);
+      """.stripMargin,
+      ".*/settings/backchanelling" -> s"""
+        |var owner = $$("input[type=hidden][name=owner]").val();
+        |var repository = $$("input[type=hidden][name=repository]").val();
+        |$$('ul.side-menu li:last').after(
+        |  $$('<li class="active"></li>').append(
+        |   $$('<a href="">Back Chanelling</a>').attr('href', '${path}/' + owner + '/' + repository + '/settings/backchanelling')
+        |  )
+        |);
+        |
+      """.stripMargin)
+  }
 }
-
 //class GistRepositoryFilter extends GitRepositoryFilter with AccountService {
 //
 //  override def filter(path: String, userName: Option[String], settings: SystemSettings, isUpdating: Boolean)
