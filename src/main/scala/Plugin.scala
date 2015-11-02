@@ -9,7 +9,7 @@ class Plugin extends gitbucket.core.plugin.Plugin {
 
   new ActivityTrigger
 
-  override val pluginId: String = "backchanneling"
+  override val pluginId: String = "backchanneling_notifier"
 
   override val pluginName: String = "BackChanneling Notifier Plugin"
 
