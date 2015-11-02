@@ -2,6 +2,7 @@ import gitbucket.backchanelling.trigger.ActivityTrigger
 import gitbucket.core.service.SystemSettingsService.SystemSettings
 import gitbucket.core.plugin._
 import gitbucket.core.util.Version
+import gitbucket.backchanelling.controller._
 import javax.servlet.ServletContext
 
 class Plugin extends gitbucket.core.plugin.Plugin {
@@ -26,11 +27,10 @@ class Plugin extends gitbucket.core.plugin.Plugin {
   //  override val repositoryRoutings = Seq(
   //    GitRepositoryRouting("gist/(.+?)/(.+?)\\.git", "gist/$1/$2", new GistRepositoryFilter())
   //  )
-  //
-  //  override val controllers = Seq(
-  //    "/*" -> new GistController()
-  //  )
-  //
+
+  override val controllers = Seq(
+    "/*" -> new BackChanellingController()
+  )
   override def javaScripts(registry: PluginRegistry, context: ServletContext, settings: SystemSettings): Seq[(String, String)] = {
     // Add Snippet link to the header
     val path = settings.baseUrl.getOrElse(context.getContextPath)
