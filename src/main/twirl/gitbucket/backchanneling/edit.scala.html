@@ -1,4 +1,4 @@
-@(repository: gitbucket.core.service.RepositoryService.RepositoryInfo, info: Option[Any])(implicit context: gitbucket.core.controller.Context)
+@(repository: gitbucket.core.service.RepositoryService.RepositoryInfo, backChanneling: gitbucket.backchanneling.model.BackChanneling, info: Option[Any])(implicit context: gitbucket.core.controller.Context)
 @import context._
 @import gitbucket.core.view.helpers._
 @gitbucket.core.html.main("Back Channeling", Some(repository)){
@@ -11,17 +11,17 @@
     <div class="box-content">
       <fieldset>
         <label for="applicationUrl" class="strong">Application URL:</label>
-        <input type="text" name="applicationUrl" id="applicationUrl" value="" placeholder="e.g. http://localhost:3009/" style="width: 600px;"/>
+        <input type="text" name="applicationUrl" id="applicationUrl" value="@backChanneling.url" placeholder="e.g. http://localhost:3009/" style="width: 600px;"/>
         <span id="error-applicationUrl" class="error"></span>
       </fieldset>
       <fieldset class="margin">
         <label for="authorizationCode" class="strong">Authorization Code:</label>
-        <input type="text" name="authorizationCode" id="authorizationCode" value=""/>
+        <input type="text" name="authorizationCode" id="authorizationCode" value="@backChanneling.authorizationCode"/>
         <span id="error-authorizationCode" class="error"></span>
       </fieldset>
       <fieldset class="margin">
         <label for="threadId" class="strong">Thread Id:</label>
-        <input type="text" name="threadId" id="threadId" value=""/>
+        <input type="text" name="threadId" id="threadId" value="@backChanneling.threadId"/>
         <span id="error-threadId" class="error"></span>
       </fieldset>
     </div>
