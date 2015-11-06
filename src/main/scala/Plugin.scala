@@ -52,7 +52,7 @@ class Plugin extends gitbucket.core.plugin.Plugin {
         |   $$('<a href="">Back Channeling</a>').attr('href', '${path}/' + owner + '/' + repository + '/settings/backchanneling')
         |  )
         |);
-        |
+        |$$('#remove').click(function(){return confirm('Are you really sure you want to remove?');});
       """.stripMargin)
   }
 }

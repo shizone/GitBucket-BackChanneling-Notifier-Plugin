@@ -5,9 +5,9 @@
 @gitbucket.core.html.menu("settings", repository){
 @gitbucket.core.settings.html.menu("backchanneling", repository){
 @gitbucket.core.helper.html.information(info)
-<form id="form" method="post" action="@url(repository)/settings/backchanneling/update" validate="true">
+<form id="form" method="post" validate="true">
   <div class="box">
-    <div class="box-header">Back Chanelling</div>
+    <div class="box-header">Back Channeling</div>
     <div class="box-content">
       <fieldset>
         <label for="applicationUrl" class="strong">Application URL:</label>
@@ -21,14 +21,14 @@
       </fieldset>
       <fieldset class="margin">
         <label for="threadId" class="strong">Thread Id:</label>
-        <input type="text" name="threadId" id="threadId" value="@backChanneling.threadId"/>
+        <input type="text" name="threadId" id="threadId" value="@if(backChanneling.threadId != 0) {@backChanneling.threadId}"/>
         <span id="error-threadId" class="error"></span>
       </fieldset>
     </div>
   </div>
   <div class="align-right" style="margin-top: 20px;">
-    <input type="submit" class="btn btn-warning" value="Remove"/>
-    <input type="submit" class="btn btn-success" value="Apply changes"/>
+    <a id="remove" href="@url(repository)/settings/backchanneling/delete" class="btn btn-danger">Remove settings</a>
+    <input type="submit" class="btn btn-success" formaction="@url(repository)/settings/backchanneling/update" value="Apply changes"/>
   </div>
 </form>
 }
