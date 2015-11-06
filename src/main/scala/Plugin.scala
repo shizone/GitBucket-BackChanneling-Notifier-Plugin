@@ -24,12 +24,9 @@ class Plugin extends gitbucket.core.plugin.Plugin {
     println("-- Back-Channeling plug-in initialized --")
   }
 
-  //  override val repositoryRoutings = Seq(
-  //    GitRepositoryRouting("gist/(.+?)/(.+?)\\.git", "gist/$1/$2", new GistRepositoryFilter())
-  //  )
-
   override val controllers = Seq(
-    "/*" -> new BackChannelingController()
+    "/*" -> new BackChannelingSettingsController(),
+    "/*" -> new BackChannelingWebHookController()
   )
   override def javaScripts(registry: PluginRegistry, context: ServletContext, settings: SystemSettings): Seq[(String, String)] = {
     // Add Snippet link to the header
@@ -56,18 +53,3 @@ class Plugin extends gitbucket.core.plugin.Plugin {
       """.stripMargin)
   }
 }
-//class GistRepositoryFilter extends GitRepositoryFilter with AccountService {
-//
-//  override def filter(path: String, userName: Option[String], settings: SystemSettings, isUpdating: Boolean)
-//                     (implicit session: Session): Boolean = {
-//    if(isUpdating){
-//      (for {
-//        userName <- userName
-//        account  <- getAccountByUserName(userName)
-//      } yield
-//        path.startsWith("/" + userName + "/") || account.isAdmin
-//      ).getOrElse(false)
-//    } else true
-//  }
-//
-//}

@@ -5,18 +5,17 @@ import jp.sf.amateras.scalatra.forms._
 import gitbucket.backchanneling.model.BackChanneling
 import gitbucket.backchanneling.service.BackChannelingService
 import gitbucket.core.controller.ControllerBase
-import gitbucket.core.service.RepositoryService
-import gitbucket.core.service.AccountService
+import gitbucket.core.service.{WebHookService, RepositoryService, AccountService}
 import gitbucket.core.util._
 import gitbucket.core.util.Implicits._
 
 import gitbucket.backchanneling.html
 
-class BackChannelingController extends BackChannelingControllerBase
-  with RepositoryService with AccountService with OwnerAuthenticator with BackChannelingService
+class BackChannelingSettingsController extends BackChannelingSettingsControllerBase
+  with RepositoryService with AccountService with OwnerAuthenticator with WebHookService with BackChannelingService
 
-trait BackChannelingControllerBase extends ControllerBase {
-  self: RepositoryService with AccountService with OwnerAuthenticator with BackChannelingService =>
+trait BackChannelingSettingsControllerBase extends ControllerBase {
+  self: RepositoryService with AccountService with OwnerAuthenticator with WebHookService with BackChannelingService =>
 
   case class BackChannelingForm(applicationUrl: String, authorizationCode: String, threadId: Long)
   val backChannelingForm = mapping(
@@ -24,6 +23,8 @@ trait BackChannelingControllerBase extends ControllerBase {
     "authorizationCode" -> trim(label("Authorization Code" , text(required, maxlength(16)))),
     "threadId"          -> trim(label("Thread ID"          , long(required)))
   )(BackChannelingForm.apply)
+
+  val backChannelngWebHook = "webhook/backchanneling"
 
   get("/:owner/:repository/settings/backchanneling")(ownerOnly {repository =>
     getBackChanneling(repository.owner, repository.name).map { backChanneling =>
@@ -34,11 +35,16 @@ trait BackChannelingControllerBase extends ControllerBase {
   post("/:owner/:repository/settings/backchanneling/update", backChannelingForm)(ownerOnly {(form, repository) =>
     deleteBackChanneling(repository.owner, repository.name)
     registerBackChanneling(repository.owner, repository.name, form.applicationUrl, form.authorizationCode, form.threadId)
+    val url = request.getRequestURL.toString.replaceAll("settings/backchanneling/update", "webhook/backchanneling")
+    deleteWebHookURL(repository.owner, repository.name, url)
+    addWebHookURL(repository.owner, repository.name, url)
     redirect(s"/${repository.owner}/${repository.name}/settings/backchanneling")
   })
 
   get("/:owner/:repository/settings/backchanneling/delete")(ownerOnly {repository =>
     deleteBackChanneling(repository.owner, repository.name)
+    val url = request.getRequestURL.toString.replaceAll("settings/backchanneling/deletet", "webhook/backchanneling")
+    deleteWebHookURL(repository.owner, repository.name, url)
     redirect(s"/${repository.owner}/${repository.name}/settings/backchanneling")
   })
 
