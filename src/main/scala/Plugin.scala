@@ -41,6 +41,11 @@ class Plugin extends gitbucket.core.plugin.Plugin {
         |  )
         |);
       """.stripMargin,
+      ".*/settings/hooks" -> s"""
+        |var owner = $$("input[type=hidden][name=owner]").val();
+        |var repository = $$("input[type=hidden][name=repository]").val();
+        |$$("li:contains('"+owner+"/"+repository+"/webhook/backchanneling')").remove();
+      """.stripMargin,
       ".*/settings/backchanneling" -> s"""
         |var owner = $$("input[type=hidden][name=owner]").val();
         |var repository = $$("input[type=hidden][name=repository]").val();
