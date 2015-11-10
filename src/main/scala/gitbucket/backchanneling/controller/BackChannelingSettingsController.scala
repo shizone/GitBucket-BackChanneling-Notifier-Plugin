@@ -3,7 +3,7 @@ package gitbucket.backchanneling.controller
 import jp.sf.amateras.scalatra.forms._
 
 import gitbucket.backchanneling.model.BackChanneling
-import gitbucket.backchanneling.service.BackChannelingService
+import gitbucket.backchanneling.service.BackChannelingSettingsService
 import gitbucket.core.controller.ControllerBase
 import gitbucket.core.service.{WebHookService, RepositoryService, AccountService}
 import gitbucket.core.util._
@@ -12,10 +12,10 @@ import gitbucket.core.util.Implicits._
 import gitbucket.backchanneling.html
 
 class BackChannelingSettingsController extends BackChannelingSettingsControllerBase
-  with RepositoryService with AccountService with OwnerAuthenticator with WebHookService with BackChannelingService
+  with RepositoryService with AccountService with OwnerAuthenticator with WebHookService with BackChannelingSettingsService
 
 trait BackChannelingSettingsControllerBase extends ControllerBase {
-  self: RepositoryService with AccountService with OwnerAuthenticator with WebHookService with BackChannelingService =>
+  self: RepositoryService with AccountService with OwnerAuthenticator with WebHookService with BackChannelingSettingsService =>
 
   case class BackChannelingForm(applicationUrl: String, authorizationCode: String, threadId: Long)
   val backChannelingForm = mapping(

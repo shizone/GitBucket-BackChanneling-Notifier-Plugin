@@ -4,7 +4,7 @@ import gitbucket.backchanneling.model.BackChanneling
 import gitbucket.backchanneling.model.Profile._
 import profile.simple._
 
-trait BackChannelingService {
+trait BackChannelingSettingsService {
   def getBackChanneling(userName: String, repositoryName: String)(implicit s: Session): Option[BackChanneling] =
     BackChannelings.filter(t => (t.userName === userName.bind) && (t.repositoryName === repositoryName.bind)).firstOption
 
