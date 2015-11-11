@@ -16,16 +16,13 @@ trait BackChannelingWebHookControllerBase extends ControllerBase {
   )(x => x)
 
   post("/:owner/:repository/webhook/backchanneling", payload){payload =>
-    val owner = params("owner")
-    val repository = params("repository")
-    try{
-      getBackChanneling(owner, repository) map { backChanneling =>
-        token(backChanneling) map { token =>
-          comment(backChanneling, token, payload)
-        }
-      }
-    } catch {
-      case e: Exception => e.printStackTrace()
-    }
+    for {
+      owner <- Some(params("owner"))
+      repository <- Some(params("repository"))
+      urlBase <- Some(request.getRequestURL.toString.replaceAll(s"/${owner}/${repository}/webhook/backchanneling", ""))
+      backChanneling <- getBackChanneling(owner, repository)
+      token <- token(backChanneling)
+      payload <- toPayload(request.getHeader("X-Github-Event"), payload)
+    } comment(backChanneling, token, toContent(urlBase, owner, repository, payload))
   }
 }
