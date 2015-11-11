@@ -46,29 +46,25 @@ trait BackChannelingAPIService {
 
   def toContent(urlBase: String, owner: String, repository: String, payload: Payload): String = payload match {
     case issues: IssuesPayload =>
-      s"""
-        |Repository: [${issues.repository.full_name}](${urlBase}/${owner}/${repository})
-        |Issue: [#${issues.issue.number} ${issues.issue.title}](${urlBase}/${owner}/${repository}/issues/${issues.issue.number}) ${issues.action} by [${issues.sender.login}](${urlBase}/${issues.sender.login})
-      """.stripMargin
+      s"""|Repository: [${issues.repository.full_name}](${urlBase}/${owner}/${repository})
+         |Issue: [#${issues.issue.number} ${issues.issue.title}](${urlBase}/${owner}/${repository}/issues/${issues.issue.number}) ${issues.action} by [${issues.sender.login}](${urlBase}/${issues.sender.login})
+         |""".stripMargin
     case issueComment: IssueCommentPayload =>
-      s"""
-        |Repository: [${issueComment.repository.full_name}](${urlBase}/${owner}/${repository})
-        |Issue: [#${issueComment.issue.number} ${issueComment.issue.title}](${urlBase}/issues/${issueComment.issue.number}) commented by [${issueComment.comment.user}](${urlBase}/${issueComment.comment.user})
-        |Comment:
-        |${issueComment.comment.body}
-       """.stripMargin
+      s"""|Repository: [${issueComment.repository.full_name}](${urlBase}/${owner}/${repository})
+         |Issue: [#${issueComment.issue.number} ${issueComment.issue.title}](${urlBase}/issues/${issueComment.issue.number}) commented by [${issueComment.comment.user.login}](${urlBase}/${issueComment.comment.user.login})
+         |Comment:
+         |${issueComment.comment.body}
+         |""".stripMargin
     case pullRequest: PullRequestPayload =>
-      s"""
-         |Repository: [${pullRequest.repository.full_name}](${urlBase}/${owner}/${repository})
+      s"""|Repository: [${pullRequest.repository.full_name}](${urlBase}/${owner}/${repository})
          |Pull request: [#${pullRequest.pull_request.number} ${pullRequest.pull_request.title}](${urlBase}/pulls/${pullRequest.pull_request.number}) ${pullRequest.action} commented by [${pullRequest.sender.login}](${urlBase}/${pullRequest.sender.login})
          |${pullRequest.pull_request.body}
-       """.stripMargin
+         |""".stripMargin
     case push: PushPayload =>
-      s"""
-         |Repository: [${push.repository.full_name}](${urlBase}/${owner}/${repository})
+      s"""|Repository: [${push.repository.full_name}](${urlBase}/${owner}/${repository})
          |Pushed to [${push.ref.replaceAll("refs/heads/", "")}](${urlBase}/${owner}/${repository}/tree/${push.ref.replaceAll("refs/heads/", "")}) by [${push.pusher.login}](${urlBase}/${push.pusher.login})
          |Commits:
-       """.stripMargin +
+         |""".stripMargin +
         (push.commits.map{commit =>
           s"[${commit.id}](${urlBase}/${owner}/${repository}/commit/${commit.id}) ${commit.message}"
         } reduce(_ + _))
@@ -81,9 +77,7 @@ trait BackChannelingAPIService {
     httpPost.addHeader("Content-Type", "application/edn")
     httpPost.addHeader("Authorization", s"Token ${token}")
     httpPost.setEntity(new StringEntity(
-      s"""
-         |{:comment/content "${content}", :comment/format :comment.format/markdown, :thread/id ${backChanneling.threadId}}
-       """.stripMargin, "UTF-8"))
+      s"""{:comment/content "${content}", :comment/format :comment.format/markdown, :thread/id ${backChanneling.threadId}}""", "UTF-8"))
     httpClient.execute(httpPost)
     httpPost.releaseConnection()
   }
