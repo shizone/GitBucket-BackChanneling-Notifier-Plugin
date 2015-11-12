@@ -57,8 +57,8 @@ case class PullRequest(
   number: Int,
   updated_at: Date,
   created_at: Date,
-  head: Commit,
-  base: Commit,
+  head: PRCommit,
+  base: PRCommit,
   mergeable: Option[Boolean],
   title: String,
   body: String,
@@ -82,6 +82,11 @@ case class Commit(
   modified: List[String],
   author: PersonIdent,
   committer: PersonIdent)
+
+case class PRCommit(
+  sha: String,
+  ref: String,
+  repo: Repository)
 
 case class PersonIdent(
   name: String,

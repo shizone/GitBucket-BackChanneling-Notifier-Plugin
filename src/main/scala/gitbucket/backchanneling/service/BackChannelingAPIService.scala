@@ -57,7 +57,7 @@ trait BackChannelingAPIService {
          |""".stripMargin
     case pullRequest: PullRequestPayload =>
       s"""|Repository: [${pullRequest.repository.full_name}](${urlBase}/${owner}/${repository})
-         |Pull request: [#${pullRequest.pull_request.number} ${pullRequest.pull_request.title}](${urlBase}/pulls/${pullRequest.pull_request.number}) ${pullRequest.action} commented by [${pullRequest.sender.login}](${urlBase}/${pullRequest.sender.login})
+         |Pull request: [#${pullRequest.pull_request.number} ${pullRequest.pull_request.title}](${urlBase}/pulls/${pullRequest.pull_request.number}) ${pullRequest.action} by [${pullRequest.sender.login}](${urlBase}/${pullRequest.sender.login})
          |${pullRequest.pull_request.body}
          |""".stripMargin
     case push: PushPayload =>
