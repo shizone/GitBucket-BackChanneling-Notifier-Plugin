@@ -1,4 +1,4 @@
-package gitbucket.backchanneling.model
+package shizone.gitbucket.backchanneling.model
 
 trait BackChannelingComponent { self: gitbucket.core.model.Profile =>
   import profile.simple._

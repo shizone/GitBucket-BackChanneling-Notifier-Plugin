@@ -1,4 +1,4 @@
-package gitbucket.backchanneling.model
+package shizone.gitbucket.backchanneling.model
 
 import gitbucket.core.model._
 

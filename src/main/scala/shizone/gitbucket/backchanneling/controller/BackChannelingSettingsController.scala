@@ -1,15 +1,15 @@
-package gitbucket.backchanneling.controller
+package shizone.gitbucket.backchanneling.controller
 
 import jp.sf.amateras.scalatra.forms._
 
-import gitbucket.backchanneling.model.BackChanneling
-import gitbucket.backchanneling.service.BackChannelingSettingsService
+import shizone.gitbucket.backchanneling.model.BackChanneling
+import shizone.gitbucket.backchanneling.service.BackChannelingSettingsService
 import gitbucket.core.controller.ControllerBase
 import gitbucket.core.service.{WebHookService, RepositoryService, AccountService}
 import gitbucket.core.util._
 import gitbucket.core.util.Implicits._
 
-import gitbucket.backchanneling.html
+import shizone.gitbucket.backchanneling.html
 
 class BackChannelingSettingsController extends BackChannelingSettingsControllerBase
   with RepositoryService with AccountService with OwnerAuthenticator with WebHookService with BackChannelingSettingsService

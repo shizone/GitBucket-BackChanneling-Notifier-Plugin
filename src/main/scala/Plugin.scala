@@ -1,7 +1,7 @@
 import gitbucket.core.service.SystemSettingsService.SystemSettings
 import gitbucket.core.plugin._
 import gitbucket.core.util.Version
-import gitbucket.backchanneling.controller._
+import shizone.gitbucket.backchanneling.controller._
 import javax.servlet.ServletContext
 
 class Plugin extends gitbucket.core.plugin.Plugin {

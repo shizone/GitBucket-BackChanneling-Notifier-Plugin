@@ -1,7 +1,7 @@
-package gitbucket.backchanneling.service
+package shizone.gitbucket.backchanneling.service
 
-import gitbucket.backchanneling.model.BackChanneling
-import gitbucket.backchanneling.model.Profile._
+import shizone.gitbucket.backchanneling.model.BackChanneling
+import shizone.gitbucket.backchanneling.model.Profile._
 import profile.simple._
 
 trait BackChannelingSettingsService {

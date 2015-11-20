@@ -1,6 +1,6 @@
-package gitbucket.backchanneling.controller
+package shizone.gitbucket.backchanneling.controller
 
-import gitbucket.backchanneling.service._
+import shizone.gitbucket.backchanneling.service._
 import gitbucket.core.controller.ControllerBase
 import gitbucket.core.util.Implicits._
 import jp.sf.amateras.scalatra.forms._

@@ -1,4 +1,4 @@
-package gitbucket.backchanneling.model
+package shizone.gitbucket.backchanneling.model
 import java.util.Date
 
 sealed trait Payload

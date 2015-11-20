@@ -1,6 +1,6 @@
-package gitbucket.backchanneling.service
+package shizone.gitbucket.backchanneling.service
 
-import gitbucket.backchanneling.model._
+import shizone.gitbucket.backchanneling.model._
 import org.apache.http.NameValuePair
 import org.apache.http.client.entity.UrlEncodedFormEntity
 import org.apache.http.client.methods.HttpPost
