@@ -31,3 +31,6 @@ bin
 *.log
 *.swp
 *.bak
+
+#ensime
+.ensime*
