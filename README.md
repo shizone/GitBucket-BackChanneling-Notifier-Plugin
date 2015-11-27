@@ -9,7 +9,7 @@ The activities of [GitBucket](https://github.com/takezoe/gitbucket) it is a plug
 
 ## Usage
 
-* In reference to the [README of BackChanneling](https://github.com/kawasima/back-channeling/blob/master/README.md), to perform the creation of the thread creation and Bot user.
+* By reference to the [README of BackChanneling](https://github.com/kawasima/back-channeling/blob/master/README.md), to create a thread and Bot user.
 
 * Go to *owner*/*repository*/settings/backchanneling, to set URL of BackChanneling, application code, thread ID.
 
